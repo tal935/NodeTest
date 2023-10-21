@@ -1,9 +1,12 @@
+import interfaces.Node;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
 
 public class NodePathFinder {
+
     public static Node getLowestFCost(LinkedList<Node> open, Node start, Node end) {
         if (open.isEmpty()) {
             return null; // Handle the case where the list is empty
@@ -20,7 +23,7 @@ public class NodePathFinder {
         return open.get(saveI);
     }
 
-    public static LinkedList<Node> returnPath(Node node, Map<Node, Node> parents){
+    public static LinkedList<Node> returnPath(Node node, Map<Node, Node> parents) {
         LinkedList<Node> pathList = new LinkedList<>();
         Node current = node;
         while (current != null) {
@@ -30,13 +33,15 @@ public class NodePathFinder {
         printPath(pathList);
         return pathList;
     }
-    public static void printPath(LinkedList<Node> pathList){
+
+    public static void printPath(LinkedList<Node> pathList) {
         for (int i = 0; i <= pathList.size() - 1; i++) {
-            System.out.print(pathList.get(i).getName()+", ");
+            System.out.print(pathList.get(i).getName() + ", ");
         }
         System.out.println();
     }
-    public static LinkedList<Node> getPath(Node start, Node end){
+
+    public static LinkedList<Node> getPath(Node start, Node end) {
         LinkedList<Node> nodesCanGoTo = new LinkedList<Node>();
         LinkedList<Node> closed = new LinkedList<Node>();
         Map<Node, Node> parents = new HashMap<>();
@@ -52,7 +57,7 @@ public class NodePathFinder {
             }
 
             for (Node neighbor : current.getNeighbors()) {
-                if (!closed.contains(neighbor) && !nodesCanGoTo.contains(neighbor) ) { //!isInList(neighbor, closed) && !isInList(neighbor, nodesCanGoTo)
+                if (!closed.contains(neighbor) && !nodesCanGoTo.contains(neighbor)) { //!isInList(neighbor, closed) && !isInList(neighbor, nodesCanGoTo)
                     nodesCanGoTo.add(neighbor);
                     parents.put(neighbor, current);
                 }
